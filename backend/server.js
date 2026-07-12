@@ -1,21 +1,26 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 app.use(bodyParser.json());
-app.use(express.static(__dirname)); // serve index.html
+app.use(express.static(path.join(__dirname, "public")));
 
-// Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/todolist", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://localhost:27017/todolist", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch(err => console.error("❌ MongoDB error:", err));
 
-const TaskSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema({
   text: String,
-  done: Boolean
+  category: String,
+  done: { type: Boolean, default: false }
 });
-const Task = mongoose.model("Task", TaskSchema);
+const Task = mongoose.model("Task", taskSchema);
 
-// Routes
 app.get("/tasks", async (req, res) => {
   const tasks = await Task.find();
   res.json(tasks);
@@ -34,7 +39,9 @@ app.put("/tasks/:id", async (req, res) => {
 
 app.delete("/tasks/:id", async (req, res) => {
   await Task.findByIdAndDelete(req.params.id);
-  res.json({ message: "Task deleted" });
+  res.json({ success: true });
 });
 
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+app.listen(3000, () => {
+  console.log("🚀 Server running on http://localhost:3000");
+});

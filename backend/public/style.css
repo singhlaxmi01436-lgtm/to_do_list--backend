@@ -1,0 +1,85 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #f0f8ff, #e6f7ff);
+  padding: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  color: #1e90ff;
+}
+
+.input-section {
+  text-align: center;
+  margin: 20px 0;
+}
+
+input, select, button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #1e90ff;
+  color: #fff;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #fff;
+  margin: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+li:hover {
+  transform: scale(1.02);
+}
+
+#progressBarContainer {
+  width: 100%;
+  background: #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+#progressBar {
+  height: 20px;
+  width: 0;
+  background: #1e90ff;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+/* Dark mode */
+body.dark {
+  background: #121212;
+  color: #f0f0f0;
+}
+
+body.dark li {
+  background: #1e1e1e;
+  color: #f0f0f0;
+}
